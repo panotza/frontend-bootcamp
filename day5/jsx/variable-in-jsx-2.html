@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+  <title>Hello React</title>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const msg = 'hello world!';
+    ReactDOM.render(
+      <div>
+        <div />
+        <div></div>
+        <div>{false}</div>
+        <div>{null}</div>
+        <div>{undefined}</div>
+        <div>{true}</div>
+      </div>,
+      document.getElementById('root'));
+  </script>
+</body>
+</html>
