@@ -13,7 +13,13 @@
   <div id="root"></div>
   <script type="text/babel">
     const msg = 'hello world!';
-    ReactDOM.render(<div>{msg}</div>, document.getElementById('root'));
+    const arr = ['arr1', 'arr2', 'arr3'];
+    ReactDOM.render(
+      <div>
+        <div>{msg}</div>
+        <div>{arr}</div>
+      </div>
+      , document.getElementById('root'));
   </script>
 </body>
 </html>
