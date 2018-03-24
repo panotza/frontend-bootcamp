@@ -12,11 +12,15 @@
 <body>
   <div id="root"></div>
   <script type="text/babel">
-    const MyTitle = () => (<h1>Hello React!</h1>);
+    const MyButton = () => (<button type="button">Click Me!</button>);
     class Hello extends React.Component {
       render() {
-        const msgs = new Array(4).fill().map((_, i) => (
-            <MyTitle key={i} />
+        const people = ['john', 'derp', 'somchai'];        
+        const msgs = people.map(person => (
+            <div key={person}>
+              <h1>Hello {person}</h1>
+              <MyButton />
+            </div>
           )
         );
         return (<div>{msgs}</div>);
