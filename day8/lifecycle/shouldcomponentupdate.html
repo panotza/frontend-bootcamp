@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+  <title>Component Life Cycle: React</title>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    class ValueList extends React.Component {
+      shouldComponentUpdate(nextProps, nextState) {
+        if (nextProps.values !== this.props.values) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+      componentDidUpdate(prevProps, prevState) {
+        console.log('children componentDidUpdate');
+      }
+      render() {
+        const { values } = this.props;
+        return (
+            <ul>
+              {values.map(v => <li key={v}>{`value: ${v}`}</li>)}
+            </ul>
+          );
+      }
+    }
+    class App extends React.Component {
+      state = {
+        values: []
+      };
+      handleClick = () => {
+        this.setState(
+          {
+            values: [
+              ...this.state.values,
+              Math.random()
+            ]
+          }
+        );
+      }
+      handleClick2 = () => {
+        this.setState(
+          {
+            someValue: true
+          }
+        );
+      }
+      render() {
+        const { values } = this.state;
+        return (
+          <div>
+            <ValueList values={values}/>
+            <button onClick={this.handleClick}>Add value</button>
+            <button onClick={this.handleClick2}>set other state</button>
+          </div>
+        );
+      }
+    }
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+  <title>Refs: React</title>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    class User extends React.Component {
+      showAlert = (value) => {
+        alert(`show ${value} from function in user Component`);
+      }
+      render() {
+        return (<div>User Component</div>);
+      }
+    }
+    class App extends React.Component {
+      handleClick = () => {
+        this.user.showAlert('Secret');
+      }
+      render() {
+        return (
+          <div>
+            <User ref={(user) => this.user = user} />
+            <button onClick={this.handleClick}>Show Alert</button>
+          </div>
+        )
+      }
+    }
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+</body>
+</html>

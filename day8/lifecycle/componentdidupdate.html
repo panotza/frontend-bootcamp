@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+  <title>Component Life Cycle: React</title>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    class Profile extends React.Component {
+      state = {
+        user: null
+      }
+      async componentDidUpdate(prevProps, prevState) {
+        if (prevProps.willFetch === false && this.props.willFetch === true) {
+          const responese = await fetch('https://randomuser.me/api/');
+          const data = await responese.json();
+          this.setState({ user: data.results[0] });
+        }
+      }
+      render() {
+        const { user } = this.state;
+        if (user) {
+          return (
+            <div>
+              <img src={user.picture.medium} />
+              <p>name: {`${user.name.first} ${user.name.last}`}</p>
+              <p>gender: {user.gender}</p>
+            </div>
+          );
+        }
+        return (<div>No user sign in</div>);
+      }
+    }
+    class App extends React.Component {
+      state = {
+        willFetch: false
+      };
+      handleClick = () => {
+        this.setState({ willFetch: true });
+      }
+      render() {
+        return (
+          <div>
+            <Profile willFetch={this.state.willFetch} />
+            <button onClick={this.handleClick}>fetch</button>
+          </div>
+        );
+      }
+    }
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+</body>
+</html>

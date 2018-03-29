@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+  <title>Component Life Cycle: React</title>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    class ErrorBoundary extends React.Component {
+      state = {
+        error: null,
+        errorInfo: null
+      }
+      componentDidCatch(error, errorInfo) {
+        this.setState({
+          error: error,
+          errorInfo: errorInfo
+        });
+      }
+      render() {
+        if (this.state.error) {
+          return ( // Fallback UI if an error occurs
+            <div>
+              <h2>{"Oh-no! Something went wrong"}</h2>
+              <p className="red">
+                {this.state.error && this.state.error.toString()}
+              </p>
+              <div>{"Component Stack Error Details: "}</div>
+              <p className="red">{this.state.errorInfo.componentStack}</p>
+            </div>
+          );
+        }
+        return this.props.children;
+      }
+    }
+    class BuggyButton extends React.Component {
+      render() {
+        throw new Error("Something Broken!!!");
+        return (<div>Error</div>);
+      }
+    }
+    class App extends React.Component {
+      render() {
+        return (
+          <ErrorBoundary>
+            <BugButton />
+          </ErrorBoundary>
+        );
+      }
+    }
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+</body>
+</html>

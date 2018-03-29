@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+  <title>Component Life Cycle: React</title>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    class Children extends React.Component {
+      constructor(props) {
+        super(props);
+        console.log('children constructor');
+      }
+      componentWillMount() {
+        console.log('children componentWillMount');
+      }
+      componentDidMount() {
+        console.log('children componentDidMount');
+      }
+      componentWillReceiveProps(nextProps) {
+        console.log('children componentWillReceiveProps');
+      }
+      shouldComponentUpdate(nextProps, nextState) {
+        console.log('children shouldComponentUpdate');
+        return true;
+      }
+      componentWillUpdate(nextProps, nextState) {
+        console.log('children componentWillUpdate');
+      }
+      componentDidUpdate(prevProps, prevState) {
+        console.log('children componentDidUpdate');
+      }
+      componentWillUnmount() {
+        console.log('children componentWillUnmount');
+      }
+      render() {
+        return <div>children</div>;
+      }
+    }
+
+    class Parent extends React.Component {
+      constructor(props) {
+        super(props);
+        console.log('parent constructor');
+      }
+      componentWillMount() {
+        console.log('parent componentWillMount');
+      }
+      componentDidMount() {
+        console.log('parent componentDidMount');
+      }
+      componentWillReceiveProps(nextProps) {
+        console.log('parent componentWillReceiveProps');
+      }
+      shouldComponentUpdate(nextProps, nextState) {
+        console.log('parent shouldComponentUpdate');
+        return true;
+      }
+      componentWillUpdate(nextProps, nextState) {
+        console.log('parent componentWillUpdate');
+      }
+      componentDidUpdate(prevProps, prevState) {
+        console.log('parent componentDidUpdate');
+      }
+      handleClick = () => {
+        console.log('----set state----')
+        this.setState({});
+      }
+      render() {
+        return (
+          <div>
+            <h1>Parent</h1>
+            <button onClick={this.handleClick}>set state</button>
+            <Children />
+          </div>
+        );
+      }
+    }
+    ReactDOM.render(<Parent />, document.getElementById('root'));
+  </script>
+</body>
+</html>

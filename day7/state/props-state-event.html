@@ -53,9 +53,7 @@
       handleSubmit = (values) => {
         this.setState({
           nextId: this.state.nextId + 1,
-          users: [
-            ...this.state.users,
-            {
+          users: [ ...this.state.users, {
               id: this.state.nextId,
               name: values
             }
