@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+  <title>Props: React</title>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    class Display extends React.Component {
+      render() {
+        return (
+          <div>
+            <p>string: {this.props.myStr}</p>
+            <p>number: {this.props.myNumber}</p>
+            <p>false value: {this.props.myBool.toString()}</p>
+            <p>true value: {this.props.myTrueBool.toString()}</p>
+            <p>null: {this.props.myNull === null && 'yes'}</p>
+            <p>undefined: {this.props.myUndefinded === undefined && 'yes'}</p>
+            <p>object: {JSON.stringify(this.props.myObj)}</p>
+            <p>array: {JSON.stringify(this.props.myArray)}</p>
+            <p>Date: {this.props.myDate.toString()}</p>
+            <p>function: {this.props.myShowNameFunc('John')}</p>
+          </div>
+        );
+      }
+    }
+
+    class App extends React.Component {
+      showNameFunc = (name) => {
+        return 'my name is ' + name;
+      }
+      render() {
+        const str = 'hello react!';
+        const number = 5;
+        const bool = false;
+        const nullValue = null;
+        const undefinedValue = undefined;
+        const obj = { name: 'somchai', b: 2 };
+        const arr = ['john', 2, 'smith', 4];
+        const now = new Date();
+        return (
+          <Display
+            myStr={str}
+            myNumber={number}
+            myBool={bool}
+            myTrueBool
+            myNull={nullValue}
+            myUndefinded={undefinedValue}
+            myObj={obj}
+            myArray={arr}
+            myDate={now}
+            myShowNameFunc={this.showNameFunc}
+          />
+        );
+      }
+    }
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+</body>
+</html>

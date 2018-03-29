@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+  <title>State: React</title>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    class App extends React.Component {
+      state = {
+        nextSkillId: 3,
+        newSkill: '',
+        skills: [
+          {
+            id: 1,
+            name: 'React'
+          },
+          {
+            id: 2,
+            name: 'NodeJS'
+          }
+        ]
+      };
+
+      handleChange = (e) => {
+        this.setState({ newSkill: e.target.value });
+      }
+
+      handleAddSkill = () => {
+        const nextSkillId = this.state.nextSkillId + 1;
+        this.setState({
+          nextSkillId,
+          newSkill: '',
+          skills: [...this.state.skills, { id: this.state.nextSkillId, name: this.state.newSkill }]
+        });
+      }
+
+      editSkill = (id) => {
+        const [selectedSkill] = this.state.skills.filter(skill => skill.id === id);
+        const input = prompt("Please enter skill:", selectedSkill.name);
+        if (!input) return;
+        this.setState({
+          skills: this.state.skills.map(skill => (
+            (skill.id === id)
+            ? { id, name: input }
+            : skill
+          ))
+        });
+      }
+
+      deleteSkill = (id) => {
+        this.setState({
+          skills: this.state.skills.filter(skill => skill.id !== id)
+        });
+      }
+
+      render() {
+        const clickable = { cursor: 'pointer' };
+        const skills = this.state.skills.map(skill => (
+          <li key={skill.id}>
+            {skill.name}
+            <span style={clickable} onClick={() => this.editSkill(skill.id)}> - edit</span>
+            <span style={clickable} onClick={() => this.deleteSkill(skill.id)}> - x</span>
+          </li>
+        ));
+        return (
+          <div>
+            <ul>{skills}</ul>
+            <input type="text" onChange={this.handleChange} value={this.state.newSkill}/>
+            <button onClick={this.handleAddSkill}>add skill</button>
+          </div>
+        );
+      }
+    }
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+</body>
+</html>

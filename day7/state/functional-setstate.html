@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+  <title>functional setState: React</title>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    // Original from https://codepen.io/mrscobbler/pen/JEoEgN/
+    class BadCounter extends React.Component{
+      state = { count : 0 }
+      incrementCount = () => {
+        this.setState({count : this.state.count + 1})
+        this.setState({count : this.state.count + 1})
+      }
+      render(){
+        return (
+          <div>
+            <button onClick={this.incrementCount}>Bad Increment + 2</button>
+            <div>{this.state.count}</div>
+          </div>
+        )
+      }
+    }
+
+    class GoodCounter extends React.Component{
+      state = { count : 0 }
+      incrementCount = () => {
+      this.setState((prevState, props) => ({
+          count: prevState.count + 1
+        }));
+      this.setState((prevState, props) => ({
+          count: prevState.count + 1
+        }));
+      }
+      render(){
+        return (
+          <div>
+            <button onClick={this.incrementCount}>Good Increment + 2</button>
+            <div>{this.state.count}</div>
+          </div>
+        )
+      }
+    }
+
+    ReactDOM.render(<div><BadCounter/><GoodCounter/></div>, document.getElementById('root')
+    );
+  </script>
+</body>
+</html>

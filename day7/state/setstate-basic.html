@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+  <title>State: React</title>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    class App extends React.Component {
+      state = {
+        name: 'John',
+        age: 30,
+        skills: [
+          {
+            id: 1,
+            name: 'React'
+          },
+          {
+            id: 2,
+            name: 'NodeJS'
+          }
+        ]
+      };
+      handleChangeName = () => {
+        this.setState({ name: 'smith' });
+      }
+      handleChangeAge = () => {
+        this.setState({ age: 45 });
+      }
+      handleChangeSkill = () => {
+        this.setState({
+          skills: [
+            {
+              id: 3,
+              name: 'Java'
+            },
+            {
+              id: 4,
+              name: 'C++'
+            },
+            { id: 5,
+              name: 'Swift'
+            }
+          ]
+        });
+      }
+      render() {
+        return (
+          <div>
+            <p>name: {this.state.name}</p>
+            <p>age: {this.state.age}</p>
+            <ul>
+              {this.state.skills.map(skill => <li key={skill.id}>{skill.name}</li>)}
+            </ul>
+            <button onClick={this.handleChangeName}>change name</button>
+            <button onClick={this.handleChangeAge}>change age</button>
+            <button onClick={this.handleChangeSkill}>change skills</button>
+          </div>
+        );
+      }
+    }
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+</body>
+</html>
