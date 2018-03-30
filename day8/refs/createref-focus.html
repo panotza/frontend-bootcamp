@@ -13,13 +13,14 @@
   <div id="root"></div>
   <script type="text/babel">
     class App extends React.Component {
+      textInput = React.createRef();
       handleClick = () => {
-        this.textInput.focus();
+        this.textInput.current.focus();
       }
       render() {
         return (
           <div>
-            <input ref={(input) => this.textInput = input}/>
+            <input ref={this.textInput}/>
             <button onClick={this.handleClick}>set input Focus</button>
           </div>
         );

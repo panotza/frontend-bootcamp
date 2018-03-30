@@ -14,12 +14,12 @@
   <script type="text/babel">
     class App extends React.Component {
       handleClick = () => {
-        console.log(this.input.value);
+        console.log(this.textInput.value);
       }
       render() {
         return (
           <div>
-            <input ref={(input) => this.input = input}/>
+            <input ref={(input) => this.textInput = input}/>
             <button onClick={this.handleClick}>get value</button>
           </div>
         );

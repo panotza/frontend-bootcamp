@@ -13,71 +13,69 @@
   <div id="root"></div>
   <script type="text/babel">
     class Children extends React.Component {
+      state = { a: 1 };
       constructor(props) {
         super(props);
         console.log('children constructor');
       }
-      componentWillMount() {
-        console.log('children componentWillMount');
+      static getDerivedStateFromProps(nextProps, prevState) {
+        console.log('children getDerivedStateFromProps');
       }
       componentDidMount() {
         console.log('children componentDidMount');
-      }
-      componentWillReceiveProps(nextProps) {
-        console.log('children componentWillReceiveProps');
       }
       shouldComponentUpdate(nextProps, nextState) {
         console.log('children shouldComponentUpdate');
         return true;
       }
-      componentWillUpdate(nextProps, nextState) {
-        console.log('children componentWillUpdate');
+      getSnapshotBeforeUpdate(prevProps, prevState) {
+        console.log('children getSnapshotBeforeUpdate');
       }
-      componentDidUpdate(prevProps, prevState) {
+      componentDidUpdate(prevProps, prevState, snapshot) {
         console.log('children componentDidUpdate');
       }
       componentWillUnmount() {
         console.log('children componentWillUnmount');
       }
       render() {
-        return <div>children</div>;
+        console.log('children render');
+        return <div>children {this.props.a}</div>;
       }
     }
 
     class Parent extends React.Component {
       constructor(props) {
         super(props);
+        this.state = { a: 0 };
         console.log('parent constructor');
       }
-      componentWillMount() {
-        console.log('parent componentWillMount');
+      static getDerivedStateFromProps(nextProps, prevState) {
+        console.log('parent getDerivedStateFromProps');
       }
       componentDidMount() {
         console.log('parent componentDidMount');
-      }
-      componentWillReceiveProps(nextProps) {
-        console.log('parent componentWillReceiveProps');
       }
       shouldComponentUpdate(nextProps, nextState) {
         console.log('parent shouldComponentUpdate');
         return true;
       }
-      componentWillUpdate(nextProps, nextState) {
-        console.log('parent componentWillUpdate');
+      getSnapshotBeforeUpdate(prevProps, prevState) {
+        console.log('parent getSnapshotBeforeUpdate');
       }
-      componentDidUpdate(prevProps, prevState) {
+      componentDidUpdate(prevProps, prevState, snapshot) {
         console.log('parent componentDidUpdate');
       }
       handleClick = () => {
         console.log('----set state----')
-        this.setState({});
+        this.setState({ a: this.state.a + 1 });
       }
       render() {
+        console.log('parent render');
         return (
           <div>
             <h1>Parent</h1>
             <button onClick={this.handleClick}>set state</button>
-            <Children />
+            <Children a={this.state.a} />
           </div>
         );
       }

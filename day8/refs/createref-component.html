@@ -7,42 +7,31 @@
   <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
-  <title>Component Life Cycle: React</title>
+  <title>Refs: React</title>
 </head>
 <body>
   <div id="root"></div>
   <script type="text/babel">
-    class Game extends React.Component {
-      state = {
-        score: 50
-      }
-      componentWillReceiveProps(nextProps) {
-        if (nextProps.reset === true) {
-          this.setState({ score: 0 });
-        }
+    class User extends React.Component {
+      showAlert = (value) => {
+        alert(`show ${value} from function in user Component`);
       }
       render() {
-        return (<div>{this.state.score}</div>);
+        return (<div>User Component</div>);
       }
     }
     class App extends React.Component {
-      state = {
-        reset: false
-      };
+      user = React.createRef();
       handleClick = () => {
-        this.setState(
-          {
-            reset: true
-          }
-        );
+        this.user.current.showAlert('Secret');
       }
       render() {
         return (
           <div>
-            <Game reset={this.state.reset}/>
-            <button onClick={this.handleClick}>Reset</button>
+            <User ref={this.user} />
+            <button onClick={this.handleClick}>Show Alert</button>
           </div>
-        );
+        )
       }
     }
     ReactDOM.render(<App />, document.getElementById('root'));

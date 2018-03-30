@@ -16,7 +16,7 @@
       state = {
         user: null
       }
-      async componentDidUpdate(prevProps, prevState) {
+      async componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.willFetch === false && this.props.willFetch === true) {
           const responese = await fetch('https://randomuser.me/api/');
           const data = await responese.json();
