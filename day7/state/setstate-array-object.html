@@ -42,7 +42,7 @@
       }
 
       editSkill = (id) => {
-        const [selectedSkill] = this.state.skills.filter(skill => skill.id === id);
+        const selectedSkill = this.state.skills.find(skill => skill.id === id);
         const input = prompt("Please enter skill:", selectedSkill.name);
         if (!input) return;
         this.setState({
