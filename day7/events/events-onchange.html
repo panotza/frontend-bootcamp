@@ -19,7 +19,7 @@
         console.log(e.target.value);
       }
       render() {
-        return (<input name="myInput" onKeyUp={this.handleChange} />);
+        return (<input name="myInput" onChange={this.handleChange} />);
       }
     }
     ReactDOM.render(<App />, document.getElementById('root'));
