@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="lib.js"></script>
+  <title>Redux from scratch</title>
+</head>
+<body>
+  <div id="root" style="text-align: center">0</div>
+  <script type="text/javascript">
+    'use strict';
+    // -----------------------------------------------------------------
+    // สร้าง Action Creator
+    function IncrementBy(number) {
+      return { type: 'INCREMENT', amount: number };
+    }
+    // -----------------------------------------------------------------
+    // สร้าง Reducer
+    function myReducer(state = { count: 0 }, action) {
+      switch (action.type) {
+        case 'INCREMENT':
+          return { ...state, count: state.count + action.amount };
+        default:
+          return state;
+      }
+    }
+    // -----------------------------------------------------------------
+    // สร้าง Store
+    const store = createStore(myReducer);
+    // -----------------------------------------------------------------
+    // สร้าง Listener (Callback Function) ของเรา จะถูกเรียกมือ state ใน store เปลี่ยนแปลง
+    function myListener() {
+      const state = store.getState(); // อ่านค่า state จาก store
+      document.getElementById("root").innerHTML = state.count;
+      console.log(state);
+      console.log('--------------------');
+    }
+    // -----------------------------------------------------------------
+    // Subcribe listener
+    store.subscribe(myListener);
+    // -----------------------------------------------------------------
+    // Dispatch Action ทุกๆ 2 วินาที
+    setInterval(() => store.dispatch(IncrementBy(2)), 2000);
+  </script>
+</body>
+</html>
