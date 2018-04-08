@@ -1,0 +1,15 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.gutter {
+    padding: 10px;
+}
+
+.card {
+    display: flex;
+    width: 200px;
+    height: 200px;
+    border-radius: 20px;
+}

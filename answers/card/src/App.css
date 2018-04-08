@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.gutter {
+  padding: 16px;
+}
+
+.card-box {
+  width: 200px;
+  height: 200px;
+  border: 1px solid black;
+}
+
+.new-deck {
+  margin: auto;
+}

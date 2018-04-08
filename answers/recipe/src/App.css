@@ -1,0 +1,30 @@
+.searchbox {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.app {
+    position: relative;
+    min-height: 100%;
+}
+
+.add-btn {
+    padding: 0.5rem 0 !important;
+    width: 11rem;
+}
+
+.add-ing {
+    float: right;
+}
+
+.btn {
+    display: block;
+    margin: auto;
+    border-radius: 3px;
+    border: 0;
+    background: teal;
+    color: white;
+    outline: 0;
+    cursor: pointer;
+    padding: 5px 10px;
+}

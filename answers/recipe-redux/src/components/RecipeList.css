@@ -1,0 +1,12 @@
+.recipe-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding-bottom: 70px;
+  }
+
+  @media (max-width: 580px) {
+    .recipe-list {
+      display: block;
+    }
+  }
