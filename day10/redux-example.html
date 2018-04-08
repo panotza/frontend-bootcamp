@@ -13,7 +13,7 @@
     'use strict';
     // -----------------------------------------------------------------
     // สร้าง Action Creator
-    function IncrementBy(number) {
+    function incrementBy(number) {
       return { type: 'INCREMENT', amount: number };
     }
     // -----------------------------------------------------------------
@@ -42,7 +42,7 @@
     store.subscribe(myListener);
     // -----------------------------------------------------------------
     // Dispatch Action ทุกๆ 2 วินาที
-    setInterval(() => store.dispatch(IncrementBy(2)), 2000);
+    setInterval(() => store.dispatch(incrementBy(2)), 2000);
   </script>
 </body>
 </html>
